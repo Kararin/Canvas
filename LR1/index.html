@@ -1,12 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Function</title>
-    <link href="./style.css" rel="stylesheet">
-    <script src="app/vanilla/main.js"/></script>
-  </head>
-  <body>
-    <canvas id = "func" width="1000" height="800"></canvas>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Function</title>
+  <link href="app/style/style.css" rel="stylesheet">
+  <script src="app/vanilla/main.js" /></script>
+</head>
+
+<body>
+  <div class="card">
+    <div>
+      <h3>Background</h3>
+    </div>
+    <div class="content">
+      <span class="myTitle">color:</span>
+      <input type="color" class="input" id="backgroundColor" />
+    </div>
+    <div class="content">
+      <span class="myTitle">grid color:</span>
+      <input type="color" class="input" id="gridColor" />
+    </div>
+  </div>
+  <div class="card">
+    <h3>Axis</h3>
+    <div class="content">
+      <span class="myTitle">color:</span>
+      <input type="color" class="input" id="axisColor" />
+    </div>
+    <div class="content">
+      <span class="myTitle">labels color:</span>
+      <input type="color" class="input" id="axisTitleColor" />
+    </div>
+  </div>
+  <div class="card">
+    <h3>Chart</h3>
+    <div class="content">
+      <span class="myTitle">color:</span>
+      <input type="color" class="input" id="chartColor" />
+    </div>
+    <div class="content">
+      <span class="myTitle">attributes:</span>
+      <input type="number" placeholder="a:" class="input" defaultValue = "5" id="chartAValue" />
+    </div>
+    <div class="content">
+      <input type="number" placeholder="t:" class="input" defaultValue = "-5" id="chartValue" />
+    </div>
+    <div class="content">
+      <label for = "isChartFilled">filled:</label>
+      <input type="checkbox" class="input-checkbox" id="isChartFilled" />
+
+    </div>
+  </div>
+
+  <div class = 'canvases'>
+    <canvas class='my-canvas' id="background" width="1000" height="800"></canvas>
+    <canvas class='my-canvas ' id="func" width="1000" height="800"></canvas>
+  </div>
+</body>
+
 </html>

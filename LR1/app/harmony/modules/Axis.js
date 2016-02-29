@@ -4,12 +4,13 @@ export default class Coord extends Base {
     constructor(options) {
         super(options);
         this.font = options.font;
+        this.labelColor = options.labelColor;
     }
 
     drawCoord() {
         this.drawXCoord();
         this.drawYCoord();
-        this.drawTitles();
+        this.drawLabels();
     }
 
     drawXCoord() {
@@ -19,6 +20,7 @@ export default class Coord extends Base {
             title = -(this.width / 2 / this.interval) + 1;
 
         this.ctx.beginPath();
+        this.ctx.fillStyle = this.labelColor;
 
         while (x < end) {
             this.ctx.moveTo(x, y);
@@ -30,8 +32,6 @@ export default class Coord extends Base {
             this.ctx.lineTo(x, y + this.interval / 2);
         }
 
-        this.ctx.font = this.font;
-        this.ctx.fillText('X', x - this.interval, y + this.interval);
         this.ctx.moveTo(x, y);
         x += this.inteval;
         this.ctx.lineTo(x, y);
@@ -48,6 +48,7 @@ export default class Coord extends Base {
             title = this.height / 2 / this.interval - 1;
 
         this.ctx.beginPath();
+        this.ctx.fillStyle = this.labelColor;
 
         while (y < end) {
             this.ctx.moveTo(x, y);
@@ -64,19 +65,36 @@ export default class Coord extends Base {
             this.ctx.lineTo(x + this.interval / 2, y);
         }
 
-        this.ctx.font = this.font;
-        this.ctx.fillText('Y', x + this.interval, this.begin + this.interval);
-
         this.ctx.moveTo(x, y);
         y += this.interval;
         this.ctx.lineTo(x, y);
 
-        this.ctx.strokeStyle = '#000000';
+        this.ctx.strokeStyle = this.color;
         this.ctx.stroke();
         this.ctx.closePath();
     }
 
-    drawTitles() {
+    drawLabels() {
+      this.ctx.fillText('Y', this.width / 2 + this.interval, this.begin + this.interval);
+      this.ctx.fillText('X', this.width - this.interval, this.height / 2 + this.interval);
 
+    }
+
+    set axisColor(color) {
+      this.color = color;
+      this.drawCoord();
+    }
+
+    get axisColor() {
+      return this.color;
+    }
+
+    set labelsColor(color) {
+      this.labelColor = color;
+      this.drawCoord();
+    }
+
+    get labelsColor() {
+      return this.labelColor;
     }
 }

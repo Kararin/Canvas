@@ -17,8 +17,18 @@ export default class Field extends Base {
             this.ctx.lineTo(this.width, y);
         }
 
-        this.ctx.strokeStyle = '#eee';
+        this.ctx.strokeStyle = this.color;
         this.ctx.stroke();
         this.ctx.closePath();
+    }
+
+    set gridColor(color) {
+      this.color = color;
+
+      this.drawGrid();
+    }
+
+    get gridColor() {
+      return this.color;
     }
 }
