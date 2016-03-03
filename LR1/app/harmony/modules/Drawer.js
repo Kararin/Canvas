@@ -88,6 +88,8 @@ export default class Drawer extends Base {
     get isFilled() {
       return this.filled;
     }
-
-
 }
+
+//TODO: axis scales depends on graphic
+//TODO: markers in points
+//TODO: max(t), steps

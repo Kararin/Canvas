@@ -71,7 +71,7 @@ export default class Coord extends Base {
         y += this.interval;
         this.ctx.lineTo(x, y);
 
-        this.ctx.strokeStyle = '#000000';
+        this.ctx.strokeStyle = this.color;
         this.ctx.stroke();
         this.ctx.closePath();
     }
