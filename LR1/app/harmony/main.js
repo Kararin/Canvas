@@ -33,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx: funcCtx,
       a: 5,
       tBegin: -5,
-      filled: false
+      filled: false,
+      tFinish: 10,
+      step: 2 * 3.14 / 360
     });
 
   field.drawGrid();

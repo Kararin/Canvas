@@ -9,41 +9,77 @@ export default class Drawer extends Base {
         super(options);
         this.a = options.a;
         this.tBegin = options.tBegin;
+        this.tFinish = options.tFinish;
         this.filled = options.filled;
+        this.step = options.step;
+        this.points = {
+          x: [],
+          y: []
+        };
     }
 
     drawFunction() {
-        var steps = 10,
-            t = this.tBegin,
-            x0Value = (this.width - 0.5) / 2 / this.interval,
-            y0Value = (this.height - 0.5) / 2 / this.interval,
-            x = this.a * (t * t - 1)/(t * t + 1),
-            y = this.a * t * (t * t - 1) / (t * t + 1),
-            realX = (x + x0Value) * this.interval,
-            realY = (y0Value - y) * this.interval,
-            grade = 2 * 3.14 / 360;
+        this.calcPoints();
+        var {x, y} = this.getScaledPoints(),
+            i = 1;
 
         this.ctx.beginPath();
 
-        this.ctx.moveTo(realX, realY);
-        while (t < steps) {
-            x = this.a * (t * t - 1)/(t * t + 1);
-            y = this.a * t * (t * t - 1) / (t * t + 1);
-            console.log(`x:${x} + y:${y}`);
-            realX = (x + x0Value) * this.interval;
-            realY = this.interval * (y0Value - y);
-            this.ctx.lineTo(realX, realY);
-            t += grade;
-        }
+        this.ctx.moveTo(x[0], y[0]);
 
-        if(this.filled) {
-          this.ctx.fillStyle = this.color;
-          this.ctx.fill();
+        while (x[i]) {
+            this.ctx.lineTo(x[i], y[i]);
+            i++;
         }
 
         this.ctx.strokeStyle = this.color;
         this.ctx.stroke();
         this.ctx.closePath();
+    }
+
+    calcPoints() {
+      var t = this.tBegin;
+
+      this.cleanPoints();
+
+      while (t < this.tFinish) {
+        let {x, y} = this.countXY(t);
+        this.points.x.push(x);
+        this.points.y.push(y);
+        t +=this.step;
+      }
+    }
+
+    getScaledPoints() {
+      var xCenter = (this.width - this.begin) / 2,
+          yCenter = (this.height - this.begin) / 2,
+          x0Value = xCenter / this.interval,
+          y0Value = yCenter / this.interval,
+          scaledPoints = {
+            x: [],
+            y: []
+          };
+
+      this.points.x.forEach((xValue, index) => {
+        scaledPoints.x.push((xValue + x0Value) * this.interval);
+        scaledPoints.y.push(this.interval * (y0Value - this.points.y[index]));
+      });
+
+      return scaledPoints;
+    }
+
+    cleanPoints() {
+      this.points = {
+        x: [],
+        y: []
+      };
+    }
+
+    countXY(t) {
+      return {
+        x: this.a * (t * t - 1)/(t * t + 1),
+        y: this.a * t * (t * t - 1) / (t * t + 1)
+      };
     }
 
     clear() {
@@ -62,7 +98,7 @@ export default class Drawer extends Base {
     set Avalue(value) {
       this.a = value;
       this.clear();
-      this.drawFunction(false);
+      this.drawFunction();
     }
 
     get Avalue() {
@@ -72,7 +108,7 @@ export default class Drawer extends Base {
     set beginValue(value) {
       this.tBegin = value;
       this.clear();
-      this.drawFunction(false);
+      this.drawFunction();
     }
 
     get beginValue() {
@@ -87,6 +123,32 @@ export default class Drawer extends Base {
 
     get isFilled() {
       return this.filled;
+    }
+
+    get extremymX() {
+      var result = null;
+
+      if (this.points.x.length) {
+        result = {
+          min:  Math.min(...this.points.x),
+          max: Math.max(...this.points.x)
+        };
+      }
+
+      return result;
+    }
+
+    get extremymY() {
+      var result = null;
+
+      if (this.points.y.length) {
+        result = {
+          min: Math.min(...this.points.y),
+          max: Math.max(...this.points.y)
+        };
+      }
+
+      return result;
     }
 }
 
