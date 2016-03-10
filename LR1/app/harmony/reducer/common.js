@@ -3,7 +3,8 @@ export default (state = {
         width: 1000,
         height: 800
     },
-    step: 10
+    step: 20,
+    begin: 0.5
 }, action) => {
     var actions = {
         'SET_SIZE': () => {
@@ -17,6 +18,11 @@ export default (state = {
                 size: action.size
             });
         },
+        'SET_BEGIN': () => {
+            return Object.assign({}, state, {
+                begin: action.begin
+            });
+        }
     },
         result = state;
 

@@ -46,16 +46,33 @@ export default class Func {
       return this.a;
     }
 
-    set tMin(value) {
+    set tMinValue(value) {
       this.iMin = value;
-      this.clear();
     }
 
-    get tMin() {
+    get tMinValue() {
       return this.tMin;
     }
 
+    set tMaxValue(value) {
+        this.tMAx = value;
+    }
+
+    get tMaxValue() {
+        return this.tMAx;
+    }
+
+    set stepValue(value) {
+        this.step = value;
+    }
+
+    get stepValue() {
+        return this.step;
+    }
+
     get pointsValues() {
+        this.cleanPoints();
+        this.calcPoints();
         return Object.assign({}, this.points);
     }
 

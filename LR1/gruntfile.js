@@ -12,12 +12,12 @@ module.exports = function(grunt) {
         babel: {
             options: {
                 sourceMap: true,
-                presets: ['es2015']
+                presets: ['es2015', 'react']
             },
             files: {
                 expand: true,
                 cwd: '<%= reactBase%>',
-                src: ['**/*.js'],
+                src: ['**/*.js', '**/*.jsx'],
                 dest: '<%=temp%>',
                 ext: '.js'
             }
@@ -58,6 +58,13 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false
                 }
+            },
+            watchAgain: {
+                files: ['./gruntfile.js'],
+                options: {
+                    spawn: false
+                },
+                tasks: ['watch']
             }
         }
     });

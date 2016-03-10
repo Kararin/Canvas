@@ -11,3 +11,10 @@ export const setStep = (step) => {
         step
     };
 };
+
+export const setBegin = (begin) => {
+    return {
+        type: 'SET_BEGIN',
+        begin
+    };
+};

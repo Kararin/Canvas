@@ -1,16 +1,22 @@
 export default (state = {
-    color: '#afa9a9',
+    bgColor: '#ffffff',
+    grColor: '#ede7e7',
     ctx: null
 }, action) => {
     var actions = {
-            'SET_FIELD_COLOR': () => {
+            SET_FIELD_COLOR: () => {
                 return Object.assign({}, state, {
-                    color: action.color
+                    bgColor: action.color
                 });
             },
-            'SET_FIELD_CTX': () => {
+            SET_FIELD_CTX: () => {
                 return Object.assign({}, state, {
                     ctx: action.ctx
+                });
+            },
+            SET_GRID_COLOR: () => {
+                return Object.assign({}, state, {
+                    grColor:  action.color
                 });
             }
         },
