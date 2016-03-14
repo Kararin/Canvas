@@ -24,7 +24,9 @@ export default ({
                  }}/>
         </Content>
         <Content title = 'attributes'>
-            <input type = "number"
+            <label>
+                a:
+                <input type = "number"
                    placeholder = "a:"
                    className = "input"
                    defaultValue = {a}
@@ -32,9 +34,12 @@ export default ({
                        e.preventDefault();
                        changeA(Number(e.target.value))
                    }}/>
+            </label>
         </Content>
         <Content>
-            <input type = "number"
+            <label>
+               t min:
+                <input type = "number"
                    placeholder = "t min:"
                    className = "input"
                    defaultValue = {tMin}
@@ -42,26 +47,34 @@ export default ({
                        e.preventDefault();
                        changeTMin(Number(e.target.value))
                    }}/>
+            </label>
         </Content>
         <Content>
-            <input type = "number"
+            <label>
+               t max:
+                <input type = "number"
                    placeholder = "t max:"
                    className = "input"
-                   defaultValue = {tMin}
+                   defaultValue = {tMax}
                    onChange = {(e) => {
                        e.preventDefault();
                        changeTMax(Number(e.target.value))
                    }}/>
+            </label>
         </Content>
         <Content>
-            <input type = "number"
+            <label>
+               interval
+                <input type = "number"
                    placeholder = "interval"
                    className = "input"
+                   min = "0"
                    defaultValue = {step}
                    onChange = {(e) => {
                        e.preventDefault();
                        changeStep(Number(e.target.value))
                    }}/>
+            </label>
         </Content>
     </Paper>
 )

@@ -8,14 +8,14 @@ export default (state = {
             {ctx: action.ctx});
         },
         SET_AXIS_COLOR: () => {
-            return Objec.assign({}, state,
+            return Object.assign({}, state,
             {color: action.color});
         }
     },
     result = state;
 
     if(actions[action.type]) {
-        result = actions[action.type];
+        result = actions[action.type]();
     }
 
     return result;

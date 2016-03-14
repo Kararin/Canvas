@@ -12,13 +12,15 @@ export default class Func extends React.Component {
     }
 
     render() {
-        var {width, height, bgColor} = this.props;
+        var {width, height} = this.props.size,
+            {color} = this.props;
 
         if (this.el) {
-            this.drawAxis();
+            this.cleanCanvas();
+            this.drawFunction();
         }
 
-        return (<canvas class = 'my-canvas'
+        return (<canvas className = 'my-canvas'
                     width = {width}
                     height = {height}
                     ref = {(el) => {this.el = el;}}>
@@ -27,137 +29,56 @@ export default class Func extends React.Component {
     }
 
     drawFunction() {
-        this.calcPoints();
-        var {x, y} = this.getScaledPoints(),
+        var {points, step, ctx, color} = this.props,
+            {x, y} = this.getScaledPoints(points, step),
             i = 1;
 
-        this.ctx.beginPath();
+        ctx.beginPath();
 
-        this.ctx.moveTo(x[0], y[0]);
+        ctx.moveTo(x[0], y[0]);
 
         while (x[i]) {
-            this.ctx.lineTo(x[i], y[i]);
+            ctx.lineTo(x[i], y[i]);
+            this.drawPointer(x[i], y[i]);
             i++;
         }
 
-        this.ctx.strokeStyle = this.color;
-        this.ctx.stroke();
-        this.ctx.closePath();
+        ctx.strokeStyle = color;
+        ctx.stroke();
+        ctx.closePath();
     }
 
-    calcPoints() {
-      var t = this.tBegin;
-
-      this.cleanPoints();
-
-      while (t < this.tFinish) {
-        let {x, y} = this.countXY(t);
-        this.points.x.push(x);
-        this.points.y.push(y);
-        t +=this.step;
-      }
-    }
-
-    getScaledPoints() {
-      var xCenter = (this.width - this.begin) / 2,
-          yCenter = (this.height - this.begin) / 2,
-          x0Value = xCenter / this.interval,
-          y0Value = yCenter / this.interval,
+    getScaledPoints(points, step) {
+      var {width, height} = this.props.size,
+          {begin} = this.props,
+          xCenter = (width - begin) / 2,
+          yCenter = (height - begin) / 2,
+          x0Value = xCenter / step,
+          y0Value = yCenter / step,
           scaledPoints = {
             x: [],
             y: []
           };
 
-      this.points.x.forEach((xValue, index) => {
-        scaledPoints.x.push((xValue + x0Value) * this.interval);
-        scaledPoints.y.push(this.interval * (y0Value - this.points.y[index]));
+      points.x.forEach((xValue, index) => {
+        scaledPoints.x.push((xValue + x0Value) * step);
+        scaledPoints.y.push(step * (y0Value - points.y[index]));
       });
 
       return scaledPoints;
     }
 
-    cleanPoints() {
-      this.points = {
-        x: [],
-        y: []
-      };
+    cleanCanvas() {
+        var {width, height} = this.props.size,
+            {ctx} = this.props;
+
+        ctx.clearRect(0, 0, width, height);
     }
 
-    countXY(t) {
-      return {
-        x: this.a * (t * t - 1)/(t * t + 1),
-        y: this.a * t * (t * t - 1) / (t * t + 1)
-      };
+    drawPointer(x, y) {
+        var {ctx, color} = this.props,
+            r = 2;
+
+        ctx.arc(x, y,  r, 0, 2 * Math.PI);
     }
-
-    clear() {
-      this.ctx.clearRect(0, 0, this.width, this.height);
-    }
-
-    set chartColor(color) {
-      this.color = color;
-      this.drawFunction();
-    }
-
-    get chartColor() {
-      return this.color;
-    }
-
-    set Avalue(value) {
-      this.a = value;
-      this.clear();
-      this.drawFunction();
-    }
-
-    get Avalue() {
-      return this.a;
-    }
-
-    set beginValue(value) {
-      this.tBegin = value;
-      this.clear();
-      this.drawFunction();
-    }
-
-    get beginValue() {
-      return this.tBegin;
-    }
-
-    set isFilled(value) {
-      this.filled = value;
-      this.clear();
-      this.drawFunction();
-    }
-
-    get isFilled() {
-      return this.filled;
-    }
-
-    get extremymX() {
-      var result = null;
-
-      if (this.points.x.length) {
-        result = {
-          min:  Math.min(...this.points.x),
-          max: Math.max(...this.points.x)
-        };
-      }
-
-      return result;
-    }
-
-    get extremymY() {
-      var result = null;
-
-      if (this.points.y.length) {
-        result = {
-          min: Math.min(...this.points.y),
-          max: Math.max(...this.points.y)
-        };
-      }
-
-      return result;
-    }
-
-
 }

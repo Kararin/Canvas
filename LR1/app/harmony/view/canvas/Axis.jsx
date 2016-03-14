@@ -12,13 +12,14 @@ export default class Axis extends React.Component {
     }
 
     render() {
-        var {width, height, bgColor} = this.props;
+        var {width, height} = this.props.size;
 
         if (this.el) {
+            this.clear();
             this.drawAxis();
         }
 
-        return (<canvas class = 'my-canvas'
+        return (<canvas className = 'my-canvas'
                     width = {width}
                     height = {height}
                     ref = {(el) => {this.el = el;}}>
@@ -27,76 +28,91 @@ export default class Axis extends React.Component {
 
     }
 
-    drawCoord() {
+    drawAxis() {
         this.drawXCoord();
+        // this.drawLabels();
         this.drawYCoord();
-        this.drawLabels();
     }
 
     drawXCoord() {
-        var x = this.props.begin,
-            y = this.props.height / 2,
-            end = this.width,
-            title = -(this.width / 2 / this.interval) + 1;
+        var {min, max} = this.props.x,
+            {height, width} = this.props.size,
+            {step, color, ctx} = this.props,
+            center = width / 2,
+            x = min * step + center,
+            y = height / 2,
+            end = max * step + center,
+            title = Math.round(min) + 1;
 
-        this.ctx.beginPath();
-        this.ctx.fillStyle = this.labelColor;
+        ctx.beginPath();
+        ctx.fillStyle = color;
 
         while (x < end) {
-            this.ctx.moveTo(x, y);
-            x += this.interval;
+            ctx.moveTo(x, y);
+            x += step;
 
-            this.ctx.lineTo(x, y);
-            this.ctx.fillText(title++, x, y - this.interval / 2);
-            this.ctx.lineTo(x, y - this.interval / 2);
-            this.ctx.lineTo(x, y + this.interval / 2);
+            ctx.lineTo(x, y);
+            ctx.fillText(title++, x, y - step / 2);
+            ctx.lineTo(x, y - step / 2);
+            ctx.lineTo(x, y + step / 2);
         }
 
-        this.ctx.moveTo(x, y);
-        x += this.inteval;
-        this.ctx.lineTo(x, y);
+        ctx.moveTo(x, y);
+        x += step;
+        ctx.lineTo(x, y);
 
-        this.ctx.strokeStyle = this.color;
-        this.ctx.stroke();
-        this.ctx.closePath();
+        ctx.strokeStyle = color;
+        ctx.stroke();
+        ctx.closePath();
     }
 
     drawYCoord() {
-        var y = this.begin,
-            x = this.width / 2,
-            end = this.height,
-            title = this.height / 2 / this.interval - 1;
+        var {min, max} = this.props.y,
+            {height, width} = this.props.size,
+            {step, color, ctx} = this.props,
+            center = height / 2,
+            y = center - max * step,
+            x = width / 2,
+            end = center + Math.abs(min) * step,
+            title = Math.round(max) - 1;
 
-        this.ctx.beginPath();
-        this.ctx.fillStyle = this.labelColor;
+        ctx.beginPath();
+        ctx.fillStyle = color;
 
         while (y < end) {
-            this.ctx.moveTo(x, y);
-            y += this.interval;
-            this.ctx.lineTo(x, y);
+            ctx.moveTo(x, y);
+            y += step;
+            ctx.lineTo(x, y);
 
             if (title) {
-                this.ctx.fillText(title--, x - this.interval, y);
+                ctx.fillText(title--, x - step, y);
             } else {
                 title--;
             }
 
-            this.ctx.lineTo(x - this.interval / 2, y);
-            this.ctx.lineTo(x + this.interval / 2, y);
+            ctx.lineTo(x - step / 2, y);
+            ctx.lineTo(x + step / 2, y);
         }
 
-        this.ctx.moveTo(x, y);
-        y += this.interval;
-        this.ctx.lineTo(x, y);
+        ctx.moveTo(x, y);
+        y += step;
+        ctx.lineTo(x, y);
 
-        this.ctx.strokeStyle = this.color;
-        this.ctx.stroke();
-        this.ctx.closePath();
+        ctx.strokeStyle = color;
+        ctx.stroke();
+        ctx.closePath();
     }
 
     drawLabels() {
       this.ctx.fillText('Y', this.width / 2 + this.interval, this.begin + this.interval);
       this.ctx.fillText('X', this.width - this.interval, this.height / 2 + this.interval);
 
+    }
+
+    clear() {
+        var {ctx} = this.props,
+            {height, width} = this.props.size;
+
+        ctx.clearRect(0, 0, width, width);
     }
 }

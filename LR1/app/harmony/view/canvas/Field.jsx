@@ -19,7 +19,7 @@ export default class Field extends React.Component {
         }
 
 
-        return (<canvas class = 'my-canvas'
+        return (<canvas className = 'my-canvas'
                     width = {width}
                     height = {height}
                     ref = {(el) => {this.el = el;}}

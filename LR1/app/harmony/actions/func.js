@@ -32,3 +32,10 @@ export const setStep = (step) => {
         step
     };
 };
+
+export const setCtx = (ctx) => {
+    return {
+        type: 'SET_F_CTX',
+        ctx
+    };
+};

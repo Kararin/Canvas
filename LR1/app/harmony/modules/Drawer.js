@@ -77,7 +77,7 @@ export default class Drawer extends Base {
 
     countXY(t) {
       return {
-        x: this.a * (t * t - 1)/(t * t + 1),
+        x: this.a * (t * t - 1) / (t * t + 1),
         y: this.a * t * (t * t - 1) / (t * t + 1)
       };
     }
