@@ -17,6 +17,7 @@ export default class Coord extends Base {
             y = this.height / 2,
             end = this.width,
             title = -(this.width / 2 / this.interval) + 1;
+            
 
         this.ctx.beginPath();
 

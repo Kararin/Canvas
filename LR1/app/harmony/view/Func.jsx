@@ -23,7 +23,7 @@ export default ({
                      changeColor(e.target.value)
                  }}/>
         </Content>
-        <Content title = 'attributes'>
+        <Content>
             <label>
                 a:
                 <input type = "number"
@@ -64,7 +64,7 @@ export default ({
         </Content>
         <Content>
             <label>
-               interval
+               interval:
                 <input type = "number"
                    placeholder = "interval"
                    className = "input"

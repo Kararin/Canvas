@@ -21,3 +21,9 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Background);
+
+try {
+    
+} catch (error) {
+    
+}

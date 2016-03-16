@@ -46,6 +46,8 @@ export default class Func extends React.Component {
         ctx.strokeStyle = color;
         ctx.stroke();
         ctx.closePath();
+
+        console.timeEnd('func');
     }
 
     getScaledPoints(points, step) {
