@@ -20,7 +20,8 @@ export default class Func extends React.Component {
             this.drawFunction();
         }
 
-        return (<canvas className = 'my-canvas'
+        return( <canvas
+                    className = 'my-canvas'
                     width = {width}
                     height = {height}
                     ref = {(el) => {this.el = el;}}>

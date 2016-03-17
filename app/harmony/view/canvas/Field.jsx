@@ -24,7 +24,7 @@ export default class Field extends React.Component {
                     height = {height}
                     ref = {(el) => {this.el = el;}}
                     style = {{
-                         'background-color':  bgColor
+                         'backgroundColor':  bgColor
                     }}>
             </canvas>
         )
