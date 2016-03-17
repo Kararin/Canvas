@@ -82,7 +82,7 @@ export default class Func {
     }
 
     set stepValue(value) {
-        this.step = value;
+        (value > 0) && (this.step = value);
     }
 
     get stepValue() {

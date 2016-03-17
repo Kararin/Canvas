@@ -1,3 +1,5 @@
-export const setAxisColor = (color) => ({type: 'SET_AXIS_COLOR', color });
+import {createAction}  from 'redux-actions';
 
-export const setAxisCtx = (ctx) => ({type: 'SET_AXIS_CTX', ctx});
+export const setAxisColor = createAction('SET_AXIS_COLOR', color => color);
+
+export const setAxisCtx = createAction('SET_AXIS_CTX', ctx => ctx);
