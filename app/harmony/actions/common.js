@@ -12,6 +12,8 @@ export const setStep = (step) => {
     };
 };
 
+
+
 export const setBegin = (begin) => {
     return {
         type: 'SET_BEGIN',
