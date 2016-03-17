@@ -20,7 +20,8 @@ export default class Func extends React.Component {
             this.drawFunction();
         }
 
-        return (<canvas className = 'my-canvas'
+        return( <canvas
+                    className = 'my-canvas'
                     width = {width}
                     height = {height}
                     ref = {(el) => {this.el = el;}}>
@@ -29,17 +30,21 @@ export default class Func extends React.Component {
     }
 
     drawFunction() {
-        var {points, step, ctx, color} = this.props,
-            {x, y} = this.getScaledPoints(points, step),
+        var {points, ctx, color} = this.props,
+            {x, y} = points,
             i = 1;
 
         ctx.beginPath();
 
-        ctx.moveTo(x[0], y[0]);
+        ctx.moveTo(this.scaleX(x[0]), this.scaleY(y[0]));
 
         while (x[i]) {
-            ctx.lineTo(x[i], y[i]);
-            this.drawPointer(x[i], y[i]);
+            let tempX = this.scaleX(x[i]),
+                tempY = this.scaleY(y[i]);
+
+            ctx.lineTo(tempX, tempY);
+            this.drawPointer(tempX, tempY);
+
             i++;
         }
 
@@ -50,24 +55,22 @@ export default class Func extends React.Component {
         console.timeEnd('func');
     }
 
-    getScaledPoints(points, step) {
-      var {width, height} = this.props.size,
-          {begin} = this.props,
-          xCenter = (width - begin) / 2,
-          yCenter = (height - begin) / 2,
-          x0Value = xCenter / step,
-          y0Value = yCenter / step,
-          scaledPoints = {
-            x: [],
-            y: []
-          };
+    scaleX(x) {
+        var {width} = this.props.size,
+            {begin, step} = this.props,
+            xCenter = (width - begin) / 2,
+            x0Value = xCenter / step;
 
-      points.x.forEach((xValue, index) => {
-        scaledPoints.x.push((xValue + x0Value) * step);
-        scaledPoints.y.push(step * (y0Value - points.y[index]));
-      });
+        return (x + x0Value) * step;
+    }
 
-      return scaledPoints;
+    scaleY(y) {
+        var {height} = this.props.size,
+            {begin, step} = this.props,
+            yCenter = (height - begin) / 2,
+            y0Value = yCenter / step;
+
+        return (y0Value - y) * step;
     }
 
     cleanCanvas() {
@@ -84,3 +87,5 @@ export default class Func extends React.Component {
         ctx.arc(x, y,  r, 0, 2 * Math.PI);
     }
 }
+
+

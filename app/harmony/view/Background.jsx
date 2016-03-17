@@ -30,5 +30,3 @@ export default ({
         </Content>
     </Paper>
 )
-
-// TODO: something better then onChange

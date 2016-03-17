@@ -1,22 +1,17 @@
-export default (state = {
+import {handleActions} from 'redux-actions';
+
+export default handleActions({
+    SET_AXIS_CTX: (state, {payload}) => {
+        return Object.assign({}, state, {
+            ctx: payload
+        });
+    },
+    SET_AXIS_COLOR: (state, {payload}) => {
+        return Object.assign({}, state, {
+            color: payload
+        });
+    }
+}, {
     color: '#000000',
     ctx: null
-}, action) => {
-    var actions = {
-        SET_AXIS_CTX: () => {
-            return Object.assign({}, state,
-            {ctx: action.ctx});
-        },
-        SET_AXIS_COLOR: () => {
-            return Object.assign({}, state,
-            {color: action.color});
-        }
-    },
-    result = state;
-
-    if(actions[action.type]) {
-        result = actions[action.type]();
-    }
-
-    return result;
-};
+});

@@ -18,7 +18,7 @@ export default ({
         <Content title = 'color:'>
           <input type = "color"
                  className = "input"
-                 onChange = {(e) => {
+                 onInput = {(e) => {
                      e.preventDefault();
                      changeColor(e.target.value)
                  }}/>
