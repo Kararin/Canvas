@@ -21402,7 +21402,7 @@
 	            a: 0
 	        },
 	        options: {
-	            color: '#000000',
+	            color: '#F2B4F4',
 	            ctx: null
 	        }
 	    } : arguments[0];
@@ -22254,6 +22254,7 @@
 	                    { title: 'color:' },
 	                    _react2.default.createElement('input', { type: 'color',
 	                        className: 'input',
+	                        value: color,
 	                        onChange: function onChange(e) {
 	                            e.preventDefault();
 	                            changeColor(e.target.value);
@@ -22269,7 +22270,7 @@
 	                        _react2.default.createElement('input', { type: 'number',
 	                            placeholder: 'a:',
 	                            className: 'input',
-	                            defaultValue: a,
+	                            value: a,
 	                            onChange: function onChange(e) {
 	                                e.preventDefault();
 	                                changeA(Number(e.target.value));
@@ -22286,7 +22287,7 @@
 	                        _react2.default.createElement('input', { type: 'number',
 	                            placeholder: 't min:',
 	                            className: 'input',
-	                            defaultValue: tMin,
+	                            value: tMin,
 	                            onChange: function onChange(e) {
 	                                e.preventDefault();
 	                                changeTMin(Number(e.target.value));
@@ -22303,7 +22304,7 @@
 	                        _react2.default.createElement('input', { type: 'number',
 	                            placeholder: 't max:',
 	                            className: 'input',
-	                            defaultValue: tMax,
+	                            value: tMax,
 	                            onChange: function onChange(e) {
 	                                e.preventDefault();
 	                                changeTMax(Number(e.target.value));
@@ -22321,7 +22322,7 @@
 	                            placeholder: 'interval',
 	                            className: 'input',
 	                            min: '0',
-	                            defaultValue: step,
+	                            value: step,
 	                            onChange: function onChange(e) {
 	                                e.preventDefault();
 	                                changeStep(Number(e.target.value));

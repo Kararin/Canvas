@@ -14,6 +14,7 @@ class Func extends React.Component {
                 <Content title = 'color:'>
                 <input type = "color"
                         className = "input"
+                        value = {color}
                         onChange = {(e) => {
                             e.preventDefault();
                             changeColor(e.target.value)
@@ -25,7 +26,7 @@ class Func extends React.Component {
                         <input type = "number"
                         placeholder = "a:"
                         className = "input"
-                        defaultValue = {a}
+                        value = {a}
                         onChange = {(e) => {
                             e.preventDefault();
                             changeA(Number(e.target.value))
@@ -38,7 +39,7 @@ class Func extends React.Component {
                         <input type = "number"
                         placeholder = "t min:"
                         className = "input"
-                        defaultValue = {tMin}
+                        value = {tMin}
                         onChange = {(e) => {
                             e.preventDefault();
                             changeTMin(Number(e.target.value))
@@ -51,7 +52,7 @@ class Func extends React.Component {
                         <input type = "number"
                         placeholder = "t max:"
                         className = "input"
-                        defaultValue = {tMax}
+                        value = {tMax}
                         onChange = {(e) => {
                             e.preventDefault();
                             changeTMax(Number(e.target.value))
@@ -65,7 +66,7 @@ class Func extends React.Component {
                         placeholder = "interval"
                         className = "input"
                         min = "0"
-                        defaultValue = {step}
+                        value = {step}
                         onChange = {(e) => {
                             e.preventDefault();
                             changeStep(Number(e.target.value))

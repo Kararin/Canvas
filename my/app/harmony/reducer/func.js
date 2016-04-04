@@ -8,7 +8,7 @@ export default (state = {
             a: 0
         },
         options: {
-            color: '#000000',
+            color: '#F2B4F4',
             ctx: null
         }
     },
