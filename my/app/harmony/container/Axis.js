@@ -6,7 +6,7 @@ const mapDispatchToProps = (dispatch) => {
         return {
             changeColor: (color) => {
                 dispatch(setAxisColor(color));
-            },
+            }
         };
 };
 

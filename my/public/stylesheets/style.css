@@ -1,0 +1,73 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+body {
+  background-color: #fafaf7;
+}
+
+.card {
+  width: 300px;
+  margin: 20px;
+  padding: 3px 20px 20px 20px;
+  box-shadow: 0 0 5px grey;
+  background-color: ghostwhite;
+}
+
+.input {
+  width: 200px;
+  height: 30px;
+  font-size: 18px;
+	font-family: Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  padding: 5px;
+}
+
+.input-checkbox {
+  height: 30px;
+  padding: 5px;
+  width: 20px;
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0px;
+}
+
+.myTitle {
+  display: block;
+  color: #003d4d;
+  font-size: 20px;
+}
+
+
+.content {
+  margin: 10px;
+}
+
+.my-canvas {
+  position: absolute;
+  top: 50px;
+  right: 150px;
+}
+
+h3 {
+  color: #003d4d;
+  font-size: 24px;
+  font-weight: 200;
+  display: block;
+}
+
+.my-canvas {
+  box-shadow: 0 0 5px grey;
+}
+
+label {
+  color: #003d4d;
+  font-size: 20px;
+  display: inline-block;
+  width: 60px;
+}

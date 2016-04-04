@@ -39,3 +39,18 @@ export const setCtx = (ctx) => {
         ctx
     };
 };
+
+export const fetchParams = () => {
+    return dispatch => {
+        return fetch('/func/params')
+            .then(response => response.json())
+            .then(json => dispatch(setParams(json)));
+    };
+};
+
+export const setParams = (params) => {
+    return {
+        type: 'SET_PARAMS',
+        params
+    };
+};

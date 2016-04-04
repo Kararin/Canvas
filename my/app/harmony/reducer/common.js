@@ -3,7 +3,7 @@ export default (state = {
         width: 1000,
         height: 800
     },
-    step: 20,
+    step: 30,
     begin: 0.5
 }, action) => {
     var actions = {
