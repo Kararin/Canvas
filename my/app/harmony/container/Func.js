@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {setA, setTMin, setTMax, setColor, setStep, fetchParams} from '../actions/func';
+import {setColor, updateParam, fetchParams} from '../actions/func';
 import Func from '../view/Func';
 
 const mapDispatchToProps = (dispatch) => {
@@ -8,16 +8,16 @@ const mapDispatchToProps = (dispatch) => {
                 dispatch(setColor(color));
             },
             changeA: (a) => {
-                dispatch(setA(a));
+                dispatch(updateParam({a}));
             },
             changeTMin: (tMin) => {
-                dispatch(setTMin(tMin));
+                dispatch(updateParam({tMin}));
             },
             changeTMax: (tMax) => {
-                dispatch(setTMax(tMax));
+                dispatch(updateParam({tMax}));
             },
             changeStep: (step) => {
-                dispatch(setStep(step));
+                dispatch(updateParam({step}));
             },
             getFuncParams: () => {
                 dispatch(fetchParams());

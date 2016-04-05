@@ -13,7 +13,7 @@ const mapStateToProps = (state) => {
         step,
         begin
     } = state.common,
-        points = state.func.func.pointsValues, {
+        {points} = state.func, {
             ctx,
             color
         } = state.func.options;

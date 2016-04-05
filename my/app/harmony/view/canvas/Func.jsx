@@ -17,7 +17,7 @@ export default class Func extends React.Component {
 
         if (this.el) {
             this.cleanCanvas();
-            // this.drawFunction();
+            this.drawFunction();
         }
 
         return( <canvas

@@ -1,14 +1,14 @@
 import {handleActions} from 'redux-actions';
 
 export default handleActions({
-    SET_AXIS_CTX: (state, {payload}) => {
+    SET_AXIS_CTX: (state, {ctx}) => {
         return Object.assign({}, state, {
-            ctx: payload
+            ctx
         });
     },
-    SET_AXIS_COLOR: (state, {payload}) => {
+    SET_AXIS_COLOR: (state, {color}) => {
         return Object.assign({}, state, {
-            color: payload
+            color
         });
     }
 }, {

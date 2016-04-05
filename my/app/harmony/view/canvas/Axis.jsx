@@ -29,9 +29,9 @@ export default class Axis extends React.Component {
     }
 
     drawAxis() {
-        // this.drawXCoord();
+        this.drawXCoord();
         // this.drawLabels();
-        // this.drawYCoord();
+        this.drawYCoord();
     }
 
     drawXCoord() {

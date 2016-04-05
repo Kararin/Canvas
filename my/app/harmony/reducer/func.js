@@ -10,6 +10,10 @@ export default (state = {
         options: {
             color: '#F2B4F4',
             ctx: null
+        },
+        points: {
+            x: [],
+            y: []
         }
     },
     action) => {
@@ -54,6 +58,11 @@ export default (state = {
             SET_PARAMS: () => {
                 return Object.assign({}, state, {
                     func: action.params
+                });
+            },
+            SET_POINTS: () => {
+                return Object.assign({}, state, {
+                    points: action.points
                 });
             }
         };

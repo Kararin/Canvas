@@ -8,7 +8,16 @@ class Func extends React.Component {
     }
 
     render() {
-        var {a, tMin, tMax, color, step} = this.props;
+        var {a,
+            tMin,
+            tMax,
+            color,
+            step,
+            changeA,
+            changeColor,
+            changeStep,
+            changeTMax,
+            changeTMin} = this.props;
         return (
             <Paper title = 'Function'>
                 <Content title = 'color:'>
