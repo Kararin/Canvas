@@ -2,10 +2,10 @@ import Func from '../modules/Func';
 
 export default (state = {
         func: {
-            tMin: 0,
-            tMax: 0,
-            step: 0,
-            a: 0
+            tMin: -3,
+            tMax: 4,
+            step: 0.001,
+            a: 3
         },
         options: {
             color: '#F2B4F4',
@@ -55,11 +55,6 @@ export default (state = {
                     options
                 });
             },
-            SET_PARAMS: () => {
-                return Object.assign({}, state, {
-                    func: action.params
-                });
-            },
             SET_POINTS: () => {
                 return Object.assign({}, state, {
                     points: action.points
@@ -81,22 +76,22 @@ const params = (state = {
     a: 0
 }, action) => {
     var actions = {
-            SET_F_A: (state, action) => {
+            SET_F_A: () => {
                 return Object.assign({}, state, {
                     a: action.a
                 });
             },
-            SET_F_T_MAX: (state, action) => {
+            SET_F_T_MAX: () => {
                 return Object.assign({}, state, {
                     tMax: action.tMax
                 });
             },
-            SET_F_T_MIN: (state, action) => {
+            SET_F_T_MIN: () => {
                 return Object.assign({}, state, {
                     tMin: action.tMin
                 });
             },
-            SET_F_INTERVAL: (state, action) => {
+            SET_F_INTERVAL: () => {
                 return Object.assign({}, state, {
                     step: action.step
                 });

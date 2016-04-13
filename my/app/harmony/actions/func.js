@@ -10,40 +10,15 @@ export const setStep = (step) => ({type: 'SET_F_INTERVAL', step});
 
 export const setCtx = (ctx) => ({type: 'SET_F_CTX', ctx});
 
-export const setPointsReady = (pointsReady) => ({type: 'SET_POINTS_READY', pointsReady});
-
-export const fetchParams = () => {
+export const getPoints = (params) => {
     return dispatch => {
-        fetch('/func/params/')
-            .then(response => response.json())
-            .then(json => {dispatch(setParams(json));});
-    };
-};
+        var worker = new Worker('worker.js');
 
-export const setParams = (params) => ({type: 'SET_PARAMS', params});
+        worker.addEventListener('message', function (e) {
+            dispatch(setPoints(e.data));
+        });
 
-export const updateParam = (param) => {
-    return dispatch => {
-        fetch('/func/updateParam', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({param})
-        })
-        .then(response => response.json())
-        .then(json => {
-            dispatch(setParams(json));
-            dispatch(getPoints());});
-    };
-};
-
-export const getPoints = () => {
-    return dispatch => {
-        fetch('/func/getPoints')
-        .then(response => response.json())
-        .then(json => dispatch(setPoints(json)));
+        worker.postMessage(params);
     };
 };
 

@@ -1,7 +1,7 @@
 module.exports = {
-    entry: "./app/harmony/main.jsx",
+    entry: './app/harmony/main.jsx',
     output: {
-        filename: "./public/javascripts/main.js"
+        filename: 'main.js'
     },
     watch: true,
     devtool: 'source-map',

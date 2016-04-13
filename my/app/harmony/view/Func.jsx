@@ -3,10 +3,6 @@ import Paper from '../base/Paper';
 import Content from '../base/Content';
 
 class Func extends React.Component {
-    componentDidMount() {
-        this.props.getFuncParams();
-    }
-
     render() {
         var {a,
             tMin,
@@ -17,7 +13,9 @@ class Func extends React.Component {
             changeColor,
             changeStep,
             changeTMax,
-            changeTMin} = this.props;
+            changeTMin,
+            getPoints,
+            getUpdatedParams} = this.props;
         return (
             <Paper title = 'Function'>
                 <Content title = 'color:'>
@@ -26,7 +24,7 @@ class Func extends React.Component {
                         value = {color}
                         onChange = {(e) => {
                             e.preventDefault();
-                            changeColor(e.target.value)
+                            changeColor(e.target.value);
                         }}/>
                 </Content>
                 <Content>
@@ -37,8 +35,12 @@ class Func extends React.Component {
                         className = "input"
                         value = {a}
                         onChange = {(e) => {
+                            var value = +e.target.value;
+
                             e.preventDefault();
-                            changeA(Number(e.target.value))
+
+                            changeA(Number(value));
+                            getPoints(getUpdatedParams({a: value}));
                         }}/>
                     </label>
                 </Content>
@@ -50,8 +52,12 @@ class Func extends React.Component {
                         className = "input"
                         value = {tMin}
                         onChange = {(e) => {
+                            var value = +e.target.value;
+
                             e.preventDefault();
-                            changeTMin(Number(e.target.value))
+
+                            changeTMin(Number(e.target.value));
+                            getPoints(getUpdatedParams({tMin: value}));
                         }}/>
                     </label>
                 </Content>
@@ -63,8 +69,12 @@ class Func extends React.Component {
                         className = "input"
                         value = {tMax}
                         onChange = {(e) => {
+                            var value = +e.target.value;
+
                             e.preventDefault();
-                            changeTMax(Number(e.target.value))
+
+                            changeTMax(Number(e.target.value));
+                            getPoints(getUpdatedParams({tMax: value}));
                         }}/>
                     </label>
                 </Content>
@@ -77,8 +87,12 @@ class Func extends React.Component {
                         min = "0"
                         value = {step}
                         onChange = {(e) => {
+                            var value = +e.target.value;
+
                             e.preventDefault();
-                            changeStep(Number(e.target.value))
+
+                            changeStep(Number(e.target.value));
+                            getPoints(getUpdatedParams({step: value}));
                         }}/>
                     </label>
                 </Content>
