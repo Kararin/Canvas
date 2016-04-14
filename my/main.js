@@ -21457,10 +21457,24 @@
 	        return Object.assign({}, state, {
 	            color: color
 	        });
+	    },
+	    SET_EXTREMUM: function SET_EXTREMUM(state, _ref3) {
+	        var points = _ref3.points;
+	        return Object.assign({}, state, { points: points });
 	    }
 	}, {
 	    color: '#000000',
-	    ctx: null
+	    ctx: null,
+	    points: {
+	        x: {
+	            max: 0,
+	            min: 0
+	        },
+	        y: {
+	            max: 0,
+	            min: 0
+	        }
+	    }
 	});
 
 /***/ },
@@ -23037,6 +23051,10 @@
 	var setAxisCtx = exports.setAxisCtx = function setAxisCtx(ctx) {
 	  return { type: 'SET_AXIS_CTX', ctx: ctx };
 	};
+	
+	var setExtremym = exports.setExtremym = function setExtremym(points) {
+	  return { type: 'SET_EXTREMUM', points: points };
+	};
 
 /***/ },
 /* 212 */
@@ -23152,13 +23170,17 @@
 
 /***/ },
 /* 214 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.setPoints = exports.getPoints = exports.setCtx = exports.setStep = exports.setColor = exports.setTMax = exports.setTMin = exports.setA = undefined;
+	
+	var _axis = __webpack_require__(211);
+	
 	var setA = exports.setA = function setA(a) {
 	    return { type: 'SET_F_A', a: a };
 	};
@@ -23183,12 +23205,21 @@
 	    return { type: 'SET_F_CTX', ctx: ctx };
 	};
 	
+	//TODO: destroy worker
 	var getPoints = exports.getPoints = function getPoints(params) {
 	    return function (dispatch) {
 	        var worker = new Worker('worker.js');
 	
 	        worker.addEventListener('message', function (e) {
-	            dispatch(setPoints(e.data));
+	            var points = e.data;
+	
+	            var extremumWorker = new Worker('extWorker.js');
+	            extremumWorker.addEventListener('message', function (e) {
+	                dispatch(setPoints(points));
+	                dispatch((0, _axis.setExtremym)(e.data));
+	            });
+	
+	            extremumWorker.postMessage(points);
 	        });
 	
 	        worker.postMessage(params);
@@ -23796,15 +23827,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
 	var mapStateToProps = function mapStateToProps(state) {
 	    var _state$axis = state.axis;
 	    var color = _state$axis.color;
 	    var ctx = _state$axis.ctx;
-	    var points = state.func.points;
-	    var x = getExtremym(points.x);
-	    var y = getExtremym(points.y);
+	    var points = _state$axis.points;
+	    var x = points.x;
+	    var y = points.y;
 	    var _state$common = state.common;
 	    var step = _state$common.step;
 	    var size = _state$common.size;
@@ -23828,23 +23857,6 @@
 	    };
 	};
 	
-	var getExtremym = function getExtremym(points) {
-	    var result = null;
-	
-	    if (points.length) {
-	        result = {
-	            min: Math.min.apply(Math, _toConsumableArray(points)),
-	            max: Math.max.apply(Math, _toConsumableArray(points))
-	        };
-	    } else {
-	        result = {
-	            min: 0,
-	            max: 0
-	        };
-	    }
-	
-	    return result;
-	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Axis2.default);
 
 /***/ },

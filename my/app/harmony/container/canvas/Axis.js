@@ -3,10 +3,8 @@ import {setAxisCtx} from '../../actions/axis';
 import Axis from '../../view/canvas/Axis';
 
 const mapStateToProps = (state) => {
-    var {color, ctx} = state.axis,
-        {points} = state.func,
-        x = getExtremym(points.x),
-        y = getExtremym(points.y),
+    var {color, ctx, points} = state.axis,
+        {x, y} = points,
         {step, size} = state.common;
 
     return {
@@ -27,21 +25,4 @@ const mapDispatchToProps = (dispatch) => {
         };
 };
 
-const getExtremym = (points) => {
-    var result = null;
-
-    if (points.length) {
-        result = {
-            min: Math.min(...points),
-            max: Math.max(...points)
-        };
-    } else {
-        result = {
-            min: 0,
-            max: 0
-        };
-    }
-
-    return result;
-};
 export default connect(mapStateToProps, mapDispatchToProps)(Axis);
